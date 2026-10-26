@@ -1,0 +1,3 @@
+locont:Sensor and (locont:necessarySensorFor some (locont:WatchDVD or locont:ChooseOutfit))
+
+locont:Furniture and (locont:usedFor some (locont:Clean or locont:WaterPlants))

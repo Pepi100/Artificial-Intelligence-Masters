@@ -1,0 +1,70 @@
+Profu de lab e Andrei Dugaesescu. Seems like a nice but strict guy.
+In fiecare lab prezentam labul de saptamana trecuta.
+The ways we can represent logic, check the validity of a logical argument.
+
+Symbolic reasoning - the old way (sologisms)
+
+"First order predicate logic"
+
+Description logistics suna ca o baza de date la Banu
+
+Example Use Case
+Modeling a university domain:
+- Concepts: Student, Professor, Course, PhDStudent
+- Relationships: teaches, enrolledIn, advises
+- Reasoning: "Is a PhDStudent a type of Student?" 
+
+
+Basic Elements
+Concept names: A, B, C, ... (e.g., Student, Professor)
+Role names: R, S, T, ... (e.g., teaches, enrolledIn)
+Top concept: ⊤ (represents everything)
+Bottom concept: ⊥ (represents nothing/empty set)
+
+⊓ - and
+⊔ - or
+¬ - not
+∀ - all
+
+∀R.C = All R-successors satisfy C
+∃R.C
+≥nR, ≤nR
+
+
+Professor ⊓ ∀teaches.GraduateCourse
+A professor and all that he teaches are graduate courses
+The reason we do stuff like this is is because it makes certain operations much easier.
+Think of how hard it is to compute numbers using natural language vs digits.
+
+Homework is FL0, so only universal restriction ( ∀R.C )
+
+SUCCESSORS - chestia de dupa . in R.C
+
+Is A ⊓ B ⊓ ∀R.(C ⊓ D) ⊓ ∀S.E subsumed by A ⊓ ∀R.C ? - YES, the left one is more restrictive than the second one
+
+VREA SA NE UITAM PE LAB INAINTE SA PREZENTAM
+
+
+LAB 2:
+Knowledge graphs, used to link data
+Can generate stuff like movie cards that appear when searching on google
+
+OWL ( Wen Onthology Language)
+Axiomatic definitions: mothers OR (all females who have at lest one child)
+You have to manually define objects and states, but after that the logic cand be easily done by the reasoner
+
+tasks: define the onthology from Baggins the Hobbiton. only populate what is need to exemplify all
+We have to define many missing properties, like married to
+
+ii spun ca MIhai nu a putut sa ma lase sa prezint ca a fost o sedinta
+
+
+Open World vs Closed World
+Negations don t work because they break infers
+
+Drool is first and doesn t reason
+the reasoner infers from drool output
+La tema de scos cat mai putine ca sa vedem ca merg regulile
+
+
+

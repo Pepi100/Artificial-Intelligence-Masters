@@ -1,0 +1,3940 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.owl-ontologies.com/generations.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.owl-ontologies.com/generations.owl">
+    <Prefix name="" IRI="http://www.owl-ontologies.com/generations.owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="generations" IRI="http://www.owl-ontologies.com/generations.owl#"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
+        <Literal>An example ontology created by Matthew Horridge</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#Adult"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Aunt"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Brother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cousin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Daughter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Father"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Female"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GrandFather"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GrandMother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GrandParent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Grandchild"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Male"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Man"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Minor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Nephew"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Niece"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OffSpring"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Parent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sex"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sibling"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sister"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Son"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Uncle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Woman"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAunt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasChild"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasGrandchild"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasNephew"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasNiece"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasParent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSex"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSibling"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasUncle"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#marriedTo"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAge"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Daisy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dora"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Drogo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dudo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Fosco"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Frodo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MaleSex"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Aunt"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Brother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Cousin"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectUnionOf>
+                    <Class IRI="#Aunt"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Daughter"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Father"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Female"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#GrandFather"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#GrandMother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#GrandParent"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Grandchild"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Male"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Man"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Mother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Nephew"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Niece"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#OffSpring"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Parent"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Sex"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Sibling"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Sister"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Son"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Uncle"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Woman"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <ObjectUnionOf>
+            <Class IRI="#Aunt"/>
+            <Class IRI="#Uncle"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aunt"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Brother"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cousin"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cousin"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectUnionOf>
+                    <Class IRI="#Aunt"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cousin"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectUnionOf>
+                <Class IRI="#Aunt"/>
+                <Class IRI="#Uncle"/>
+            </ObjectUnionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Daughter"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Daughter"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Daughter"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Daughter"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Daughter"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Female"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandFather"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandMother"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandParent"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandParent"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandParent"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GrandParent"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Grandchild"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Grandchild"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Grandchild"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Male"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Man"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Man"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Man"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Man"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nephew"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nephew"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nephew"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nephew"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nephew"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Niece"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Niece"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Niece"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Niece"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Niece"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OffSpring"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OffSpring"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OffSpring"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Parent"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Parent"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Parent"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sex"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sibling"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sibling"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sibling"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sister"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sister"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sister"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sister"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sister"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Son"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Son"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Son"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Son"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Son"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <ObjectUnionOf>
+            <Class IRI="#Aunt"/>
+            <Class IRI="#Uncle"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Uncle"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woman"/>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woman"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woman"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woman"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <Class IRI="#Brother"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectIntersectionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+                <ObjectHasValue>
+                    <ObjectProperty IRI="#hasSex"/>
+                    <NamedIndividual IRI="#MaleSex"/>
+                </ObjectHasValue>
+            </ObjectIntersectionOf>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Uncle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectUnionOf>
+            <Class IRI="#Aunt"/>
+            <Class IRI="#Uncle"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Aunt"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Aunt"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectUnionOf>
+            <Class IRI="#Aunt"/>
+            <Class IRI="#Uncle"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasParent"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#marriedTo"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Parent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Mother"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Father"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#GrandParent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#GrandMother"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#GrandFather"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasChild"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Person"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasChild"/>
+                        <Class IRI="#Person"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#OffSpring"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Daughter"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Son"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectUnionOf>
+                    <Class IRI="#Aunt"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Cousin"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectUnionOf>
+                    <Class IRI="#Aunt"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectUnionOf>
+                    <Class IRI="#Aunt"/>
+                    <Class IRI="#Uncle"/>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectUnionOf>
+                <Class IRI="#Aunt"/>
+                <Class IRI="#Uncle"/>
+            </ObjectUnionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Grandchild"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <Class IRI="#Sibling"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Sister"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Woman"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Man"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <Class IRI="#Person"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Niece"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Nephew"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasSibling"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasSex"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+        <Class IRI="#Sex"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#Person"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasChild"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#marriedTo"/>
+            <Class IRI="#Aunt"/>
+        </ObjectSomeValuesFrom>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#marriedTo"/>
+            <Class IRI="#Uncle"/>
+        </ObjectSomeValuesFrom>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#FemaleSex"/>
+        </ObjectHasValue>
+        <Class IRI="#Female"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectHasValue>
+            <ObjectProperty IRI="#hasSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectHasValue>
+        <Class IRI="#Male"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Daisy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Daisy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Daisy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dora"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Drogo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Aunt"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasParent"/>
+                    <Class IRI="#Person"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Class IRI="#Uncle"/>
+            </ObjectSomeValuesFrom>
+        </ObjectUnionOf>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSibling"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Dudo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Sex"/>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Fosco"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Fosco"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Fosco"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Minor"/>
+        <NamedIndividual IRI="#Frodo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Frodo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Frodo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Frodo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasParent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Class IRI="#Person"/>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Frodo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Sex"/>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Adult"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Person"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasChild"/>
+            <Class IRI="#Person"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </ClassAssertion>
+    <DifferentIndividuals>
+        <NamedIndividual IRI="#Daisy"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </DifferentIndividuals>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Daisy"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Daisy"/>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUncle"/>
+        <NamedIndividual IRI="#Daisy"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUncle"/>
+        <NamedIndividual IRI="#Daisy"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNephew"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNiece"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Fosco"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Dora"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Frodo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNephew"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNiece"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Fosco"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#marriedTo"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#Fosco"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSibling"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGrandchild"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Daisy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGrandchild"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#Frodo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParent"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#MaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUncle"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#Dora"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUncle"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <NamedIndividual IRI="#Dudo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasChild"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+        <NamedIndividual IRI="#Frodo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSex"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+        <NamedIndividual IRI="#FemaleSex"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#marriedTo"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+        <NamedIndividual IRI="#Drogo"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Daisy"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">30</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Dora"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">78</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Drogo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">72</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Dudo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">69</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Fosco"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">106</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Frodo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">12</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasAge"/>
+        <NamedIndividual IRI="#Primula_Brandybuck"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">60</Literal>
+    </DataPropertyAssertion>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasChild"/>
+        <ObjectProperty IRI="#hasParent"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasSex"/>
+    </FunctionalObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#hasSibling"/>
+    </SymmetricObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#marriedTo"/>
+    </SymmetricObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#marriedTo"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSex"/>
+        <Class IRI="#Sex"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSex"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#FemaleSex"/>
+            <NamedIndividual IRI="#MaleSex"/>
+        </ObjectOneOf>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#marriedTo"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasAge"/>
+        <Class IRI="#Person"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasAge"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>InferAdult</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#Person"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasAge"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#age"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThan">
+                <Variable IRI="#age"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">18</Literal>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#Adult"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>inferGrandchild</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#bunic"/>
+                <Variable IRI="#copil"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#copil"/>
+                <Variable IRI="#nepot"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasGrandchild"/>
+                <Variable IRI="#bunic"/>
+                <Variable IRI="#nepot"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>InferSibling</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#p"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#p"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+            <DifferentIndividualsAtom>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </DifferentIndividualsAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>InferNephew</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#sibling"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#sibling"/>
+                <Variable IRI="#nephew"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSex"/>
+                <Variable IRI="#nephew"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasNephew"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#nephew"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>inferNiece</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#sibling"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#sibling"/>
+                <Variable IRI="#niece"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSex"/>
+                <Variable IRI="#niece"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasNiece"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#niece"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>InferChild</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#marriedTo"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#z"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasChild"/>
+                <Variable IRI="#z"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>inferAunt</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#z"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSex"/>
+                <Variable IRI="#z"/>
+                <NamedIndividual IRI="#FemaleSex"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasUncle"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#z"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>inferUncle</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasParent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSibling"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#z"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasSex"/>
+                <Variable IRI="#z"/>
+                <NamedIndividual IRI="#MaleSex"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasUncle"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#z"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>InferMinor</Literal>
+        </Annotation>
+        <Body>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasAge"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#age"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#age"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">18</Literal>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#Minor"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
