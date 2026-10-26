@@ -1,0 +1,119 @@
+# Python (compiled and cache)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.tox/
+.nox/
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Virtual environments (entire directories)
+.venv/
+venv/
+ENV/
+env/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+.jupyterlab-workspace/
+
+# Data files (large datasets - keep local or use cloud storage)
+*.dat
+*.hea
+*.arff
+*.sav
+
+# NumPy/MATLAB data
+*.npy
+*.npz
+*.mat
+*.pkl
+
+# Model artifacts
+*.pth
+*.onnx
+*.h5
+*.pt
+*.weights
+*_model.pth
+*model.pkl
+
+# Compiled binaries and DLLs
+*.dll
+*.so
+*.dylib
+*.exe
+*.lib
+*.pdb
+
+# C/C++ compiled files
+*.o
+*.obj
+*.a
+
+# MATLAB specific
+.mpi
+matlab/
+*.mlpkg
+
+# Image assets (keep locally if used in projects)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.svg
+*.ttf
+*.woff
+*.woff2
+
+# Git configuration
+.git/
+
+# Lock files and temp files
+*.lock
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Secrets and credentials
+.env
+*.env
+.terraform/
+secrets.json
+*.pem
+*.key
+
+# Build artifacts
+*_build/*
+*.orig
+
+# AI/ML specific directories
+models/
+checkpoints/
+experiments/
+logs/
+analysis/
+results/
+outputs/

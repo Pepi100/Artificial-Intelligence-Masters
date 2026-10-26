@@ -1,0 +1,86 @@
+# =============================================================================
+# SECTION 5: Generate ECG Waveform Visualizations
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 5: GENERATE ECG WAVEFORM VISUALIZATIONS")
+print("=" * 80)
+
+try:
+    # Find a valid DAT file to visualize
+    base_folder = folders[1] if len(folders) > 1 else folders[0]
+    
+    # Collect some HEA filenames for labeling
+    hea_files_in_folder = [f for f in os.listdir(os.path.join(BASE_PATH, base_folder)) 
+                          if f.endswith('.hea')][:5]
+    
+    print(f"\nCreating plots for first {len(hea_files_in_folder)} sample records...")
+    
+    fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+    fig.suptitle('Sample ECG Record Visualizations - PTB-XL Dataset', fontsize=16)
+    
+    for idx, hea_name in enumerate(hea_files_in_folder):
+        hea_file = os.path.join(BASE_PATH, base_folder, hea_name)
+        # Derive DAT filename by replacing .hea with .dat
+        dat_filename = hea_name.replace('.hea', '.dat')
+        dat_file = os.path.join(BASE_PATH, base_folder, dat_filename)
+        
+        if os.path.exists(dat_file):
+            samples = load_ecg_dat(dat_file)
+            
+            if samples is not None:
+                # Normalize for plotting (0-255 range)
+                ecg_normalized = (samples - samples.min()) / (samples.max() - samples.min()) * 255
+                
+                row = idx % 3
+                col = idx // 3
+                ax = axes[row, col]
+                
+                # Plot first 1000 samples as preview
+                ax.plot(samples[:1000], color='steelblue', linewidth=0.8)
+                ax.set_title(f"{hea_name.replace('.hea', '')} (First 1000 samples)", fontsize=10)
+                ax.grid(True, alpha=0.3)
+                ax.axhline(y=127, color='r', linestyle='--', alpha=0.5, label='Midpoint')
+                
+                # Remove empty subplot if needed
+                if col == 1 and idx % 3 != 0:
+                    ax.axis('off')
+    
+    # Tight layout
+    plt.tight_layout()
+    
+    # Save figure
+    output_path = 'eda_ecg_samples_visualization.png'
+    plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor='white')
+    print(f"\n✅ Saved ECG visualization: {output_path}")
+    
+except Exception as e:
+    print(f"⚠️  Could not generate plots: {e}")
+
+# =============================================================================
+# SECTION 6: Create File Size Distribution Histogram
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 6: CREATE FILE SIZE DISTRIBUTION PLOT")
+print("=" * 80)
+
+if all_sizes:
+    try:
+        plt.figure(figsize=(12, 5))
+        
+        # Plot histogram of HEA file sizes
+        plt.hist(all_sizes, bins=30, edgecolor='black', alpha=0.7, color='skyblue')
+        
+        plt.title('Distribution of HEA File Sizes', fontsize=14)
+        plt.xlabel('File Size (bytes)', fontsize=12)
+        plt.ylabel('Count', fontsize=12)
+        plt.grid(True, alpha=0.3)
+        
+        # Save histogram
+        output_path = 'eda_file_size_histogram.png'
+        plt.savefig(output_path, dpi=150, bbox_inches='tight')
+        print(f"✅ Saved file size histogram: {output_path}")
+        
+    except Exception as e:
+        print(f"⚠️  Could not generate histogram: {e}")
+
+print("\n✅ Section 6 complete!")

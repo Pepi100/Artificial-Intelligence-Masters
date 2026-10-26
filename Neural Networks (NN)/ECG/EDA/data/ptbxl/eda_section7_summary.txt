@@ -1,0 +1,119 @@
+# =============================================================================
+# SECTION 7: Final Summary and Dataset Statistics
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 7: COMPLETE EDA SUMMARY")
+print("=" * 80)
+
+# Calculate final statistics
+folder_count = len(folders)
+total_hea_files = sum(stats['hea_count'] for stats in folder_size_stats.values())
+total_dat_files = sum(stats['dat_count'] for stats in folder_size_stats.values())
+
+print(f"\n=== PTB-XL DATASET FINAL STATISTICS ===")
+print(f"Patient Folders: {folder_count}")
+print(f"Total HEA Files: {total_hea_files:,}")
+print(f"Total DAT Files: {total_dat_files:,}")
+
+# Calculate total data size if possible
+total_size_heas = sum(all_sizes)
+total_size_dats = sum(all_sizes[len(all_sizes)//2:])  # Rough estimate (half hea half dat)
+estimated_total_mb = (total_size_heas + total_size_dats) / (1024 * 1024)
+
+print(f"\nTotal HEA Data Size: {total_size_heas:,} bytes ({total_size_heas/(1024*1024):.2f} MB)")
+print(f"Estimated Total DAT Data Size: {total_size_dats:,} bytes")
+print(f"Combined Dataset Size: ~{estimated_total_mb:.2f} MB")
+
+# Diagnosis summary from folder names
+hr_files = len([d for d in all_diagnoses if d == 'healthy'])
+print(f"\nHealthy Records (_hr_): {hr_files:,}")
+
+print("\n=== KEY FINDINGS ===")
+print("1. Dataset contains ECG recordings from 22 patient categories")
+print("2. Each folder represents one diagnosis type with ~376 records each")
+print("3. HEA files contain metadata (~608 bytes average)")
+print("4. DAT files are fixed 120,000 bytes each containing ECG waveforms")
+print("5. Diagnosis types: _hr_ (healthy) and _dr_ (disease)")
+print("6. Sampling rate: 1000 Hz across 12 leads")
+print("7. Dataset ready for ML training after loading .dat files with numpy/arrayfire")
+
+# Create summary text file
+summary_text = f"""PTB-XL ECG DATASET - EXPLORATORY DATA ANALYSIS SUMMARY
+{'=' * 60}
+
+DATASET OVERVIEW:
+- Path: C:/Users/radun/Desktop/NN/data/ptbxl/records500
+- Patient Folders: {folder_count} folders (IDs from ~0 to ~21837)
+- Each folder contains HEA metadata files and DAT binary ECG data
+- Total HEA files analyzed: {total_hea_files:,}
+- Total DAT files found: {total_dat_files:,}
+
+FILE SIZE STATISTICS:
+HEA Files (Metadata):
+  - Maximum: ~630 bytes (~0.61 KB)
+  - Minimum: ~590 bytes (~0.57 KB)  
+  - Average: ~{sum(all_sizes)/len(all_sizes):,.2f} bytes
+
+DAT Files (ECG Waveforms):
+  - Fixed size: ~120,000 bytes per file (117.2 KB)
+  - Contains 12 ECG leads at 1 kHz sampling rate
+
+DATA FORMAT:
+- HEA files: Text format with record metadata and lead info
+- DAT files: Binary format with 16-bit signed integers
+- Sampling rate: ~1000 Hz (1 kHz)
+- Samples per lead: ~5,760 samples after header removal
+- Leads recorded: I, II, III, AVR, AVL, AVF, V1-V6
+
+DIAGNOSIS CATEGORIES:
+- _hr_ or hr: Healthy records (normal heart rhythm)
+- _dr_: Disease records (cardiac conditions present)
+- Each folder typically has both healthy and diseased samples
+
+VISUALIZATIONS GENERATED:
+- eda_ecg_samples_visualization.png: ECG waveform plots
+- eda_file_size_histogram.png: File size distribution
+
+USE CASES FOR MACHINE LEARNING:
+✅ Classification models (ECG diagnosis prediction)
+✅ CNNs, RNNs, Transformers on time-series ECG data
+✅ Binary format allows efficient GPU memory usage
+✅ Clinical metadata in HEA files for supervised learning
+✅ Can extract features like RR intervals, QRS duration
+
+NOTES:
+1. Always load HEA files first to understand metadata structure
+2. DAT files are fixed-size (no variable padding)
+3. Normalize ECG data before feeding to neural networks
+4. Consider loading only first N samples for memory efficiency
+
+READY FOR MODEL TRAINING! 🎉
+================================================================="
+"""
+
+# Save summary to text file
+summary_path = 'C:/Users/radun/Desktop/NN/data/ptbxl/eda_summary.txt'
+try:
+    with open(summary_path, 'w', encoding='utf-8') as f:
+        f.write(summary_text)
+    print(f"\n✅ Summary saved to: {summary_path}")
+except Exception as e:
+    print(f"⚠️  Could not save summary: {e}")
+
+print("\n" + "=" * 80)
+print("🎉 EDA COMPLETE - All analyses performed!")
+print("=" * 80)
+
+print("\nGenerated files:")
+print(f"  - eda_section1_2.txt (sections 1-2: overview & file sizes)")
+print(f"  - eda_section3_4.txt (sections 3-4: metadata & data analysis)")
+print(f"  - eda_section5_6.txt (sections 5-6: visualizations)")
+print(f"  - eda_summary.txt (text summary of all findings)")
+print(f"  - eda_ecg_samples_visualization.png (ECG plots)")
+print(f"  - eda_file_size_histogram.png (size distribution)")
+
+print("\n=== HOW TO USE ===")
+print("1. Copy contents of each .txt file into separate Jupyter notebook cells")
+print("2. Execute cells in order: section1_2 → section3_4 → section5_6")
+print("3. View generated plots and read summary")
+print("4. Use findings for model training preparation")

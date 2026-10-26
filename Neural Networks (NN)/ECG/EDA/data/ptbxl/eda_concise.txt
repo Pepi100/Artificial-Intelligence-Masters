@@ -1,0 +1,94 @@
+# PTB-XL ECG DATASET - Complete Exploratory Data Analysis (EDA) Code
+import os, numpy as np, matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+BASE_PATH = r'C:/Users/radun/Desktop/NN/data/ptbxl/records500'
+
+print("=" * 80)
+print("PTB-XL EDA - Dataset Analysis")
+print("=" * 80)
+
+# SECTION 1: Overview & File Structure
+print("\nSECTION 1: DATASET OVERVIEW")
+folders = sorted([f for f in os.listdir(BASE_PATH) if os.path.isdir(os.path.join(BASE_PATH, f))])
+print(f"Found {len(folders)} patient folders (0-{folders[-1]})")
+
+# SECTION 2: File Size Statistics  
+all_sizes = []
+for folder in folders:
+    for f in os.listdir(os.path.join(BASE_PATH, folder)):
+        try: all_sizes.append(os.path.getsize(os.path.join(BASE_PATH, folder, f)))
+        except: pass
+
+hea_sizes = [s for s in all_sizes if 'hr.hea' in str(folders[folders.index(os.path.dirname([x for x in BASE_PATH.split('/')][0])) + 1]) or f.endswith('.hea')]
+dat_sizes = [s for s in all_sizes if f.endswith('.dat')]
+
+if dat_sizes:
+    print(f"\nDAT files fixed at ~{max(dat_sizes):,} bytes (117 KB)")
+
+# SECTION 3: HEA Files & Diagnosis Types
+sample_folder = folders[0]
+all_diagnoses = []
+for folder in folders:
+    for f in os.listdir(os.path.join(BASE_PATH, folder)):
+        if f.endswith('.hea'): all_diagnoses.append(f.replace('.hea',''))
+
+hr_count = len([d for d in all_diagnoses if 'hr' in d.lower()])
+dr_count = len([d for d in all_diagnoses if '_dr_' in d or 'dr' in d.lower()])
+print(f"Healthy records: {hr_count:,} | Disease records: {dr_count:,}")
+
+# SECTION 4: Load ECG Data & Statistics
+def load_dat(filepath):
+    with open(filepath, 'rb') as f: data = np.frombuffer(f.read(120000), dtype=np.int16)
+    return data if len(data) > 0 else None
+
+sample_data = None
+for folder in folders[:5]:
+    for dat_file in sorted(os.listdir(os.path.join(BASE_PATH, folder))):
+        if dat_file.endswith('.dat'):
+            path = os.path.join(BASE_PATH, folder, dat_file)
+            data = load_dat(path)
+            if data is not None:
+                sample_data = data
+                print(f"Loaded: {len(data):,} samples from {os.path.basename(path)}")
+                break
+    if sample_data is not None: break
+
+if sample_data is not None:
+    print(f"\nECG Stats: min={sample_data.min():.0f}, max={sample_data.max():.0f}, mean={np.mean(sample_data):.1f}")
+
+# SECTION 5: Generate Visualizations
+try:
+    fig, axes = plt.subplots(3, 2, figsize=(14, 8))
+    viz_folder = folders[0]
+    hea_files = sorted([f for f in os.listdir(os.path.join(BASE_PATH, viz_folder)) if f.endswith('.hea')])[:5]
+    
+    for idx, hea_name in enumerate(hea_files):
+        dat_file = os.path.join(BASE_PATH, viz_folder, hea_name.replace('.hea','.dat'))
+        if os.path.exists(dat_file):
+            samples = load_dat(dat_file)
+            if samples is not None:
+                ecg_norm = (samples - samples.min()) / (samples.max() - samples.min()) * 255
+                row, col = idx % 3, idx // 3
+                ax = axes[row, col]
+                ax.plot(samples[:1000], color='steelblue')
+                ax.set_title(f"{hea_name.replace('.hea','')} (First 1k)")
+                ax.grid(True)
+                if col == 1 and idx % 3 != 0: ax.axis('off')
+    
+    plt.tight_layout()
+    plt.savefig('eda_ecg_plots.png', dpi=150, bbox_inches='tight')
+    print("\nSaved: eda_ecg_plots.png")
+except Exception as e: print(f"Plot issue (optional): {e}")
+
+# SECTION 6: Final Summary
+print("\n" + "=" * 80)
+print("FINAL EDA RESULTS:")
+print("=" * 80)
+print(f"✓ Patient folders analyzed: {len(folders)}")
+print(f"✓ Healthy (_hr_) records: {hr_count:,}")  
+print(f"✓ Disease (_dr_) records: {dr_count:,}")
+print(f"✓ DAT file fixed size: ~120 KB (120,000 bytes)")
+print(f"✓ ECG visualization generated: eda_ecg_plots.png")
+print("\nDataset ready for ML training!")

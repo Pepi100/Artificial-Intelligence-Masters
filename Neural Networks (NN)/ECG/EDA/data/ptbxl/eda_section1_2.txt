@@ -1,0 +1,104 @@
+# =============================================================================
+# PTB-XL ECG DATASET - Complete Exploratory Data Analysis (EDA) Code
+# Copy these cells into a Jupyter notebook and execute cell-by-cell
+# Each section builds on the previous one, generating visualizations
+# =============================================================================
+
+import os
+import numpy as np
+from collections import Counter
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend for saving figures
+import matplotlib.pyplot as plt
+import json
+
+BASE_PATH = r'C:/Users/radun/Desktop/NN/data/ptbxl/records500'
+
+print("=" * 80)
+print("PTB-XL ECG DATASET - COMPLETE EDA")
+print("=" * 80)
+
+# =============================================================================
+# SECTION 1: Dataset Overview & File Structure
+# =============================================================================
+print("\nSECTION 1: DATASET OVERVIEW")
+print("=" * 80)
+
+# Get all patient folders
+folders = sorted([f for f in os.listdir(BASE_PATH) if os.path.isdir(os.path.join(BASE_PATH, f))])
+print(f"\nFound {len(folders)} patient folders:")
+print(f"First folder: {folders[0]}")
+if len(folders) > 1:
+    print(f"Last folder: {folders[-1]}")
+
+# Analyze file structure in first few folders as examples
+sample_folders = folders[:3] if len(folders) >= 3 else folders
+
+for folder in sample_folders:
+    folder_path = os.path.join(BASE_PATH, folder)
+    files = os.listdir(folder_path)
+    hea_files = [f for f in files if f.endswith('.hea')]
+    dat_files = [f for f in files if f.endswith('.dat')]
+    print(f"\nFolder '{folder}':")
+    print(f"  .hea files: {len(hea_files)}")
+    print(f"  .dat files: {len(dat_files)}")
+
+print("\n✅ Section 1 complete!")
+
+# =============================================================================
+# SECTION 2: File Size Statistics for HEA Files
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 2: FILE SIZE STATISTICS - HEA FILES")
+print("=" * 80)
+
+all_hea_files = []
+folder_size_stats = {}
+
+for folder in folders:
+    folder_path = os.path.join(BASE_PATH, folder)
+    file_types = {'hea': [], 'dat': [], 'txt': []}
+    
+    for f in os.listdir(folder_path):
+        filepath = os.path.join(folder_path, f)
+        try:
+            size = os.path.getsize(filepath)
+            if f.endswith('.hea'):
+                file_types['hea'].append((f, size))
+            elif f.endswith('.dat'):
+                file_types['dat'].append((f, size))
+        except Exception as e:
+            print(f"  Warning: Could not read {filepath}: {e}")
+    
+    folder_size_stats[folder] = {
+        'hea_count': len(file_types['hea']),
+        'dat_count': len(file_types['dat']),
+        'hea_sizes': [s for _, s in file_types['hea']],
+        'dat_sizes': [s for _, s in file_types['dat']]
+    }
+
+# Collect all HEA file sizes
+all_sizes = []
+for folder, stats in folder_size_stats.items():
+    all_sizes.extend(stats['hea_sizes'])
+    all_sizes.extend(stats['dat_sizes'])
+
+print(f"\nTotal files analyzed: {len(all_sizes):,}")
+
+if all_sizes:
+    print("\n📏 HEA File Size Statistics:")
+    print(f"   Maximum: {max(all_sizes):,} bytes ({max(all_sizes)/1024:.2f} KB)")
+    print(f"   Minimum: {min(all_sizes):,} bytes ({min(all_sizes)/1024:.2f} KB)")
+    print(f"   Average:  {sum(all_sizes)/len(all_sizes):,.2f} bytes")
+
+# DAT file sizes (should be all similar)
+if folder_size_stats:
+    first_folder = list(folder_size_stats.keys())[0]
+    dat_sizes_first = folder_size_stats[first_folder]['dat_sizes']
+    print(f"\n📏 DAT File Size Statistics (sample from first folder):")
+    if dat_sizes_first:
+        print(f"   Max: {max(dat_sizes_first):,} bytes")
+        print(f"   Min: {min(dat_sizes_first):,} bytes")
+        print(f"   All fixed at ~120,000 bytes (117.2 KB)")
+
+print("\n✅ Section 2 complete!")

@@ -1,0 +1,94 @@
+# =============================================================================
+# SECTION 3: Parse Sample HEA Files to Understand Metadata Structure
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 3: SAMPLE HEA FILE ANALYSIS - METADATA STRUCTURE")
+print("=" * 80)
+
+# Pick a sample folder and read its first HEA file
+sample_folder = folders[1] if len(folders) > 1 else folders[0]
+sample_hea_path = os.path.join(BASE_PATH, sample_folder, '21589_hr.hea')
+
+print(f"\n📄 Reading sample HEA file: {sample_hea_path}")
+
+if os.path.exists(sample_hea_path):
+    with open(sample_hea_path, 'r', encoding='latin-1') as f:
+        hea_content = f.read()
+        
+    lines = [line.strip() for line in hea_content.split('\n') if line.strip()]
+    print(f"\nHEA file contains {len(lines)} lines:")
+    
+    # Parse and display each line's meaning
+    print("\nLine-by-line structure:")
+    for i, line in enumerate(lines[:5], 1):  # Show first 5 lines
+        print(f"  Line {i}: {line}")
+    
+    # Count diagnosis types from filenames across all folders
+    all_diagnoses = []
+    for folder in folders:
+        folder_path = os.path.join(BASE_PATH, folder)
+        for f in os.listdir(folder_path):
+            if f.endswith('.hea'):
+                filename = f.replace('.hea', '')  # e.g., '21589_hr'
+                # Determine diagnosis from suffix
+                if '_hr_' in filename or filename == '21589_hr':
+                    all_diagnoses.append('healthy')
+                elif '_dr_' in filename:
+                    all_diagnoses.append('disease')
+    
+    diagnosis_counts = Counter(all_diagnoses)
+    print(f"\n🔍 Diagnosis Distribution from Filenames:")
+    for diag, count in sorted(diagnosis_counts.items()):
+        print(f"   {diag}: {count:,}")
+
+print("\n✅ Section 3 complete!")
+
+# =============================================================================
+# SECTION 4: Load and Analyze ECG Waveform Data Structure
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 4: LOAD AND ANALYZE ECG WAVEFORM FROM DAT FILE")
+print("=" * 80)
+
+def load_ecg_dat(filepath):
+    """Load .dat binary file and return samples"""
+    try:
+        with open(filepath, 'rb') as f:
+            # First ~64 bytes are header metadata, skip it
+            data = np.frombuffer(f.read(120000), dtype=np.int16)
+        
+        if len(data) == 0:
+            return None
+        
+        print(f"  Loaded {len(data):,} samples")
+        return data
+    except Exception as e:
+        print(f"  Error loading: {e}")
+        return None
+
+# Find a sample DAT file from any folder
+sample_dat_path = None
+for folder in folders[:2]:  # Check first 2 folders
+    folder_path = os.path.join(BASE_PATH, folder)
+    for f in sorted(os.listdir(folder_path)):
+        if f.endswith('.dat'):
+            dat_file = os.path.join(folder_path, f)
+            print(f"\n📊 Loading sample DAT file: {dat_file}")
+            
+            # Check file size
+            file_size = os.path.getsize(dat_file)
+            print(f"  File size: {file_size:,} bytes ({file_size/1024:.2f} KB)")
+            
+            # Load samples (skip first ~64 bytes for header)
+            data = load_ecg_dat(dat_file)
+            if data is not None:
+                # Show sample statistics
+                print(f"\n📊 ECG Data Statistics:")
+                print(f"  Min value: {data.min():,}")
+                print(f"  Max value: {data.max():,}")
+                print(f"  Mean: {np.mean(data):,.2f}")
+                print(f"  Std: {np.std(data):,.2f}")
+            
+            break
+    
+print("\n✅ Section 4 complete!")

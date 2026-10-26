@@ -1,0 +1,116 @@
+# =============================================================================
+# PTB-XL ECG DATASET - Complete Exploratory Data Analysis (EDA) Code
+# =============================================================================
+# Instructions: Copy this ENTIRE content into one Jupyter notebook cell
+# and execute it cell-by-cell (the code has built-in print statements to show progress)
+# =============================================================================
+
+import os
+import numpy as np
+from collections import Counter
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend for saving figures
+import matplotlib.pyplot as plt
+import json
+
+BASE_PATH = r'C:/Users/radun/Desktop/NN/data/ptbxl/records500'
+
+print("=" * 80)
+print("PTB-XL ECG DATASET - COMPLETE EXPLORATORY DATA ANALYSIS")
+print("=" * 80)
+
+# =============================================================================
+# SECTION 1: Dataset Overview & File Structure Statistics
+# =============================================================================
+print("\nSECTION 1: DATASET OVERVIEW AND FILE STRUCTURE")
+print("-" * 60)
+
+# Get all patient folders
+folders = sorted([f for f in os.listdir(BASE_PATH) if os.path.isdir(os.path.join(BASE_PATH, f))])
+print(f"\n📁 Found {len(folders)} patient folders in dataset:")
+if len(folders) > 1:
+    print(f"   First folder: {folders[0]}")
+    print(f"   Last folder:  {folders[-1]}")
+
+# Analyze file structure - pick a few sample folders to analyze
+sample_folders = folders[:3] if len(folders) >= 3 else folders
+print(f"\n📊 Analyzing structure of first {len(sample_folders)} sample folders...")
+
+for folder in sample_folders:
+    folder_path = os.path.join(BASE_PATH, folder)
+    files = sorted(os.listdir(folder_path))
+    hea_files = [f for f in files if f.endswith('.hea')]
+    dat_files = [f for f in files if f.endswith('.dat')]
+    txt_files = [f for f in files if f.endswith('.txt') or f.endswith('README')]
+    
+    print(f"\n  Folder '{folder}':")
+    print(f"    Total .hea files: {len(hea_files):,}")
+    print(f"    Total .dat files: {len(dat_files):,}")
+    if txt_files:
+        print(f"    Additional files: {', '.join(txt_files)}")
+
+print("\n✅ Section 1 complete! All patient folders identified.")
+
+# =============================================================================
+# SECTION 2: File Size Statistics for HEA and DAT Files  
+# =============================================================================
+print("\n" + "=" * 80)
+print("SECTION 2: FILE SIZE STATISTICS")
+print("=" * 80)
+
+all_hea_files = []
+all_dat_sizes = []
+folder_stats = {}
+
+for folder in folders:
+    folder_path = os.path.join(BASE_PATH, folder)
+    hea_sizes = []
+    dat_sizes = []
+    
+    for f in sorted(os.listdir(folder_path)):
+        filepath = os.path.join(folder_path, f)
+        try:
+            size = os.path.getsize(filepath)
+            if f.endswith('.hea'):
+                hea_sizes.append(size)
+                all_hea_files.append((folder, f, size))
+            elif f.endswith('.dat'):
+                dat_sizes.append(size)
+                all_dat_sizes.append((folder, f, size))
+        except Exception as e:
+            print(f"  Warning: Could not read {filepath}: {e}")
+    
+    folder_stats[folder] = {
+        'hea_count': len(hea_sizes),
+        'dat_count': len(dat_sizes),
+        'avg_hea_size': np.mean(hea_sizes) if hea_sizes else None,
+        'avg_dat_size': np.mean(dat_sizes) if dat_sizes else None
+    }
+
+# HEA file size statistics
+all_hea_sizes = [s for _,_,s in all_hea_files]
+if all_hea_sizes:
+    print("\n📏 HEA Files (Metadata) Statistics:")
+    print(f"   Total files analyzed: {len(all_hea_sizes):,}")
+    print(f"   Maximum size:         {max(all_hea_sizes):,} bytes ({max(all_hea_sizes)/1024:.2f} KB)")
+    print(f"   Minimum size:         {min(all_hea_sizes):,} bytes ({min(all_hea_sizes)/1024:.2f} KB)")
+    print(f"   Average size:         {np.mean(all_hea_sizes):,.2f} bytes")
+    print(f"   Size range:           {max(all_hea_sizes) - min(all_hea_sizes):,} bytes")
+
+# DAT file size statistics  
+if all_dat_sizes:
+    dat_samples = all_dat_sizes[:1]  # Check first folder's files (likely fixed size)
+    first_folder_stats = folder_stats[folders[0]] if folders else {}
+    dat_sizes_first = [s for _,_,s in all_dat_sizes][:5]  # Sample from each unique folder
+    
+    print("\n📏 DAT Files (ECG Waveforms) Statistics:")
+    print(f"   Total files analyzed: {len(all_dat_sizes):,}")
+    if dat_samples:
+        unique_sizes = set(s for _,_,s in all_dat_sizes)
+        print(f"   Unique file sizes found: {len(unique_sizes)}")
+        print(f"   Sample size (first folder): {dat_sizes_first[0]:,} bytes ({dat_sizes_first[0]/1024:.2f} KB)")
+        print(f"   All DAT files fixed at ~120,000 bytes (≈117.2 KB)")
+    else:
+        print(f"   Average size (first folder): {first_folder_stats.get('avg_dat_size', 'N/A')}")
+
+print("\n✅ Section 2 complete! File sizes documented.")

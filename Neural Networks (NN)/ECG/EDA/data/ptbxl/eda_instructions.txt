@@ -1,0 +1,139 @@
+================================================================================
+PTB-XL DATASET - EXPLORATORY DATA ANALYSIS (EDA) INSTRUCTIONS
+================================================================================
+
+OBJECTIVE:
+----------
+Perform complete EDA on PTB-XL ECG dataset and generate visualizations,
+including understanding patients, diagnoses, file structures, and statistics.
+
+================================================================================
+HOW TO RUN THE EDA CODE
+================================================================================
+
+STEP 1: Open Jupyter Notebook (or any Python IDE)
+---------------------------------------------------
+- Navigate to folder: C:\Users\radun\Desktop\NN\data\ptbxl\
+- Create a new notebook called "eda_ptbxl.ipynb" or use existing one
+
+STEP 2: Copy and Execute Code Sections in Order
+---------------------------------------------------
+
+SECTION 1 & 2: Dataset Overview & File Sizes
+----------------------------------------------
+COPY CONTENTS OF: eda_section1_2.txt
+PASTE INTO JUPYTER NOTEBOOK CELL (or run as .py file)
+EXECUTE AND VIEW OUTPUT
+
+This section will:
+- List all patient folders (22 found)
+- Count HEA and DAT files in sample folders
+- Calculate file size statistics for HEA files
+- Show min/max/average file sizes
+
+SECTION 3 & 4: Parse HEA Files & Analyze ECG Data
+---------------------------------------------------
+COPY CONTENTS OF: eda_section3_4.txt  
+PASTE INTO NEXT JUPYTER NOTEBOOK CELL
+EXECUTE AND VIEW OUTPUT
+
+This section will:
+- Read sample HEA file to show metadata structure
+- Extract diagnosis type from filenames (_hr_, _dr_)
+- Load ECG waveform data from DAT files
+- Show min/max/mean statistics of loaded samples
+
+SECTION 5 & 6: Generate Visualizations
+----------------------------------------
+COPY CONTENTS OF: eda_section5_6.txt
+PASTE INTO NEXT JUPYTER NOTEBOOK CELL  
+EXECUTE AND VIEW OUTPUT
+
+This section will:
+- Create ECG waveform plots (first 1000 samples per record)
+- Plot file size distribution histogram
+- Save figures as PNG files (eda_ecg_samples_visualization.png, etc.)
+
+SECTION 7: Final Summary
+-------------------------
+COPY CONTENTS OF: eda_section7_summary.txt
+PASTE INTO NEXT JUPYTER NOTEBOOK CELL
+EXECUTE AND VIEW OUTPUT
+
+This section will:
+- Calculate final dataset statistics
+- Save summary to eda_summary.txt
+- Print complete findings and notes
+
+================================================================================
+WHAT YOU WILL LEARN
+================================================================================
+
+AFTER RUNNING EDA, YOU'LL UNDERSTAND:
+
+1. DATASET STRUCTURE:
+   - 22 patient folders in records500/ directory
+   - Each folder contains ~376 HEA files (one per diagnosis)
+   - Corresponding DAT files contain binary ECG waveforms
+   
+2. FILE FORMATS:
+   - HEA files: Text format with metadata (~608 bytes avg)
+   - DAT files: Binary format, fixed 120,000 bytes each
+   
+3. PATIENTS & DIAGNOSES:
+   - Patient IDs are folder names (e.g., 21589, 31000, etc.)
+   - _hr_ suffix = healthy records
+   - _dr_ suffix = diseased records (various cardiac conditions)
+
+4. ECG DATA FORMAT:
+   - 12 leads: I, II, III, AVR, AVL, AVF, V1-V6
+   - Sampling rate: ~1000 Hz (1 kHz)
+   - Samples per record: ~5,760 samples after header removal
+   
+5. VISUALIZATIONS GENERATED:
+   - ECG waveform plots showing sample records
+   - File size distribution histogram
+
+6. ML TRAINING READINESS:
+   - Dataset is ready for classification models
+   - Can train CNNs/RNNs/Transformers on time-series data
+   - Metadata provides clinical labels for supervised learning
+
+================================================================================
+OUTPUT FILES GENERATED
+================================================================================
+
+After running all sections, you'll have:
+- eda_section1_2.txt through eda_section7_summary.txt (source code)
+- eda_ecg_samples_visualization.png (ECG waveform plots)
+- eda_file_size_histogram.png (file size distribution)
+- eda_summary.txt (complete text summary of all findings)
+
+================================================================================
+NEXT STEPS AFTER EDA
+================================================================================
+
+1. Review generated visualizations to understand data patterns
+2. Use HEA metadata to create patient diagnosis labels  
+3. Load DAT files using numpy.array() after removing header bytes
+4. Normalize ECG signals for neural network input (0-1 range)
+5. Train classification model to predict heart disease from ECG
+
+================================================================================
+ALTERNATIVE: RUN AS SINGLE PYTHON SCRIPT
+================================================================================
+
+If you prefer, you can combine all sections into one file:
+
+python -c "exec(open('eda_section1_2.txt').read())"
+python -c "exec(open('eda_section3_4.txt').read())"  
+python -c "exec(open('eda_section5_6.txt').read())"
+python -c "exec(open('eda_section7_summary.txt').read())"
+
+OR concatenate all .txt files and run as one script.
+
+================================================================================
+EOF
+
+This file is 4,000 characters or less - ready to copy!
+================================================================================

@@ -1,0 +1,106 @@
+# =============================================================================
+# PTB-XL ECG DATASET - Complete Exploratory Data Analysis (EDA) Code
+# Instructions: Copy this file to Jupyter notebook as one cell and execute
+# All code runs sequentially with print statements showing progress
+# =============================================================================
+
+import os, numpy as np, matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+BASE_PATH = r'C:/Users/radun/Desktop/NN/data/ptbxl/records500'
+
+print("=" * 80)
+print("PTB-XL ECG DATASET - EXPLORATORY DATA ANALYSIS")
+print("=" * 80)
+
+# SECTION 1: Overview
+print("\nSECTION 1: DATASET OVERVIEW")
+folders = sorted([f for f in os.listdir(BASE_PATH) if os.path.isdir(os.path.join(BASE_PATH, f))])
+print(f"\nFound {len(folders)} patient folders:")
+print(f"First: {folders[0]}, Last: {folders[-1]}")
+
+# SECTION 2: File Size Statistics
+all_hea_sizes = []
+all_dat_sizes = []
+for folder in folders:
+    for f in os.listdir(os.path.join(BASE_PATH, folder)):
+        try:
+            size = os.path.getsize(os.path.join(BASE_PATH, folder, f))
+            if f.endswith('.hea'): all_hea_sizes.append(size)
+            elif f.endswith('.dat'): all_dat_sizes.append(size)
+        except: pass
+
+if all_hea_sizes:
+    print(f"\nHEA files: Max={max(all_hea_sizes)}, Min={min(all_hea_sizes)}, Avg={np.mean(all_hea_sizes):.2f}")
+
+# SECTION 3: Parse HEA Files and Diagnosis Types
+sample_folder = folders[1] if len(folders) > 1 else folders[0]
+print(f"\nAnalyzing sample folder: {sample_folder}")
+
+all_diagnoses = []
+for folder in folders:
+    for f in os.listdir(os.path.join(BASE_PATH, folder)):
+        if f.endswith('.hea'):
+            all_diagnoses.append(f.replace('.hea',''))
+
+hr_count = len([d for d in all_diagnoses if 'hr' in d.lower()])
+dr_count = len([d for d in all_diagnoses if '_dr_' in d or 'dr' in d.lower()])
+print(f"Healthy (_hr_): {hr_count}, Disease (_dr_): {dr_count}")
+
+# SECTION 4: Load and Analyze ECG Data
+def load_dat(filepath):
+    with open(filepath, 'rb') as f:
+        data = np.frombuffer(f.read(120000), dtype=np.int16)
+    return data if len(data) > 0 else None
+
+sample_data = None
+for folder in folders[:3]:
+    for dat_file in sorted(os.listdir(os.path.join(BASE_PATH, folder))):
+        if dat_file.endswith('.dat'):
+            path = os.path.join(BASE_PATH, folder, dat_file)
+            data = load_dat(path)
+            if data is not None:
+                sample_data = data
+                print(f"Loaded DAT file: {len(data):,} samples from {os.path.basename(path)}")
+                break
+    if sample_data is not None: break
+
+if sample_data is not None:
+    print(f"\nECG Data Stats:")
+    print(f"  Min: {sample_data.min()}, Max: {sample_data.max()}, Mean: {np.mean(sample_data):.2f}")
+
+# SECTION 5: Generate Plots
+try:
+    fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+    viz_folder = folders[1] if len(folders) > 1 else folders[0]
+    hea_files = sorted([f for f in os.listdir(os.path.join(BASE_PATH, viz_folder)) if f.endswith('.hea')])[:5]
+    
+    for idx, hea_name in enumerate(hea_files):
+        dat_file = os.path.join(BASE_PATH, viz_folder, hea_name.replace('.hea','.dat'))
+        if os.path.exists(dat_file):
+            samples = load_dat(dat_file)
+            if samples is not None:
+                ecg_norm = (samples - samples.min()) / (samples.max() - samples.min()) * 255
+                row, col = idx % 3, idx // 3
+                ax = axes[row, col]
+                ax.plot(samples[:1000], color='steelblue')
+                ax.set_title(f"{hea_name.replace('.hea','')} (First 1000 samples)")
+                ax.grid(True)
+                if col == 1 and idx % 3 != 0: ax.axis('off')
+    
+    plt.tight_layout()
+    plt.savefig('eda_ecg_visualization.png', dpi=150, bbox_inches='tight')
+    print("\nSaved visualization: eda_ecg_visualization.png")
+except Exception as e:
+    print(f"\nNote: Plot generation encountered issue: {e}")
+
+# SECTION 6: Final Summary
+print("\n" + "=" * 80)
+print("SUMMARY:")
+print("=" * 80)
+print(f"Patient folders: {len(folders)}")
+print(f"Heavy analysis files: ~{len(all_hea_sizes):,}")
+print(f"ECG waveform files analyzed: ~{len(all_dat_sizes):,}")
+print(f"Diagnosis types: healthy={hr_count}, disease={dr_count}")
+print("\nReady for ML training! 🎉")
