@@ -1,0 +1,34 @@
+// =====================================================================
+//  KRR Lab 4 - Smart home rules
+//  Part 2: what SWRL could not do (Lecture 3, slide 33 "SWRL is monotonic")
+// =====================================================================
+//
+//  Slide 33 problem                         Drools answer (this file + 03-actuation.drl)
+//  ---------------------------------------  -----------------------------------------------
+//  OccupiedRoom and EmptyRoom both hold     C1 detects it (like OWL DisjointClasses)
+//  DesiredOn vs SuppressedAction: who wins? A1 uses  not SuppressedAction(...)  -> suppression wins
+//  nothing is withdrawn when motion stops   insertLogical in 01-inference.drl (truth maintenance)
+//  no negation as failure                   not / exists over working memory (closed world)
+// =====================================================================
+
+package ro.upb.krr.smarthome.rules.agenda;
+
+import ro.upb.krr.smarthome.model.*;
+
+// ---------------------------------------------------------------------
+// C1  OccupiedRoom and EmptyRoom are disjoint.
+// OWL: DisjointClasses: OccupiedRoom, EmptyRoom   -> the reasoner reports "inconsistent ontology"
+// Drools: we do not stop; we record the conflict as a fact. Because it is inserted
+// logically, the Inconsistency disappears by itself when the conflict is resolved.
+// C1 is part of the "inference" group: it must be derived before any actuation.
+// ---------------------------------------------------------------------
+rule "C1 Occupied and empty at the same time => inconsistency"
+    agenda-group "inference"
+    auto-focus true
+when
+    OccupiedRoom( $r : room )
+    EmptyRoom( room == $r )
+then
+    insertLogical( new Inconsistency( $r ) );
+    System.out.println( "  [C1] WARNING: " + $r + " is both occupied and empty (stale sensor?)" );
+end

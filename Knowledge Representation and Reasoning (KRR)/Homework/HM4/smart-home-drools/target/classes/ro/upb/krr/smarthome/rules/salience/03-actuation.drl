@@ -1,0 +1,69 @@
+// =====================================================================
+//  KRR Lab 4 - Smart home rules
+//  Part 3: acting on the intents (the role Home Assistant plays on slide 32)
+// =====================================================================
+//
+//  On slide 32, Home Assistant reads "lamp1 is DesiredOn" and turns it on.
+//  In Drools the RHS of a rule can perform the action itself, so these are
+//  event-condition-action rules. Here the "action" changes the Light fact and
+//  prints the Home Assistant service call that would be made.
+//
+//  salience -10: actuation rules have LOWER priority than the inference rules
+//  (default salience 0), so all inference finishes before anything is switched.
+//  Otherwise a light could be switched before an Inconsistency or a
+//  SuppressedAction has been derived.
+//  (Compare with rules/agenda/03-actuation.drl, which uses agenda groups.)
+// =====================================================================
+
+package ro.upb.krr.smarthome.rules.salience;
+
+import ro.upb.krr.smarthome.model.*;
+
+// ---------------------------------------------------------------------
+// A1  Turn a light ON when desired, unless suppressed or the room is inconsistent.
+//     "not" = negation as failure: true if NO such fact is in working memory.
+// ---------------------------------------------------------------------
+rule "A1 Actuate: turn light on"
+    salience -10
+when
+    DesiredOn( $l : device )
+    not SuppressedAction( device == $l )
+    $light : Light( id == $l, hasState == "off", $r : locatedIn )
+    not Inconsistency( room == $r )
+then
+    modify( $light ) { setHasState( "on" ) };
+    System.out.println( "  [A1] >> HA call: light.turn_on   entity_id: light." + $l );
+end
+
+// ---------------------------------------------------------------------
+// A2  Turn a light OFF when desired, unless the room is inconsistent.
+// ---------------------------------------------------------------------
+rule "A2 Actuate: turn light off"
+    salience -10
+when
+    DesiredOff( $l : device )
+    $light : Light( id == $l, hasState == "on", $r : locatedIn )
+    not Inconsistency( room == $r )
+then
+    modify( $light ) { setHasState( "off" ) };
+    System.out.println( "  [A2] >> HA call: light.turn_off  entity_id: light." + $l );
+end
+
+// ---------------------------------------------------------------------
+// A3  Report actions that were blocked (useful when debugging the rule base).
+// ---------------------------------------------------------------------
+rule "A3 Report suppressed action"
+    salience -10
+when
+    SuppressedAction( $l : device )
+then
+    System.out.println( "  [A3] -- " + $l + " is desired on, but suppressed (quiet mode)" );
+end
+
+rule "A4 Report blocked room"
+    salience -10
+when
+    Inconsistency( $r : room )
+then
+    System.out.println( "  [A4] -- no actuation in " + $r + " until the inconsistency is resolved" );
+end

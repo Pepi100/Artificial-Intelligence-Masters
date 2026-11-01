@@ -1,0 +1,129 @@
+// =====================================================================
+//  KRR Lab 4 - Smart home rules
+//  Part 1: direct Drools translation of the SWRL rules (Lecture 3, slides 30-32)
+// =====================================================================
+//
+//  Translation scheme
+//  ------------------
+//  SWRL class atom        Light(?l)                 ->  $x : Light( ... )          (a pattern)
+//  SWRL property atom     locatedIn(?l, ?r)         ->  Light( locatedIn == $r )   (a field constraint)
+//  SWRL data atom         measuredLux(?s, ?lx)      ->  LuxSensor( $lx : measuredLux )
+//  SWRL built-in          swrlb:lessThan(?lx, 20)   ->  LuxSensor( measuredLux < 20 )
+//  shared variable ?r     ... ^ locatedIn(?l, ?r)   ->  bind once ($r : locatedIn), then  == $r
+//  conjunction  ^                                   ->  new line / comma
+//  head  -> C(?x)                                   ->  insertLogical( new C( $x ) )
+//
+//  Why insertLogical and not insert?
+//  SWRL is monotonic: a conclusion is never withdrawn. insertLogical gives the
+//  conclusion a JUSTIFICATION: when the conditions of the rule stop being true,
+//  Drools' truth-maintenance system retracts the conclusion automatically.
+//  (Try replacing insertLogical by insert and re-run - see Exercise 1.)
+//
+//  agenda-group "inference" + auto-focus true
+//  All rules in 01 and 02 belong to the "inference" group; the actuation rules
+//  in 03 belong to "actuation". Only the group that has the focus can fire.
+//  auto-focus gives the focus to "inference" as soon as one of its rules is
+//  activated, so derivation always runs before (and in between) actuations.
+// =====================================================================
+
+package ro.upb.krr.smarthome.rules.agenda;
+
+import ro.upb.krr.smarthome.model.*;
+
+// ---------------------------------------------------------------------
+// R1  Motion ON => room is occupied
+// SWRL: MotionSensor(?s) ^ hasState(?s, "on") ^ locatedIn(?s, ?r)
+//         -> OccupiedRoom(?r)
+// ---------------------------------------------------------------------
+rule "R1 Motion on => occupied room"
+    agenda-group "inference"
+    auto-focus true
+when
+    MotionSensor( hasState == "on", $r : locatedIn )
+then
+    insertLogical( new OccupiedRoom( $r ) );
+    System.out.println( "  [R1] OccupiedRoom(" + $r + ")" );
+end
+
+// ---------------------------------------------------------------------
+// R2  Lux below threshold => room is dark
+// SWRL: LuxSensor(?ls) ^ measuredLux(?ls, ?lx) ^ swrlb:lessThan(?lx, 20) ^ locatedIn(?ls, ?r)
+//         -> DarkRoom(?r)
+// ---------------------------------------------------------------------
+rule "R2 Low lux => dark room"
+    agenda-group "inference"
+    auto-focus true
+when
+    LuxSensor( measuredLux < 20, $r : locatedIn )
+then
+    insertLogical( new DarkRoom( $r ) );
+    System.out.println( "  [R2] DarkRoom(" + $r + ")" );
+end
+
+// ---------------------------------------------------------------------
+// R3  Occupied and dark => every Light in that room should be ON
+// SWRL: OccupiedRoom(?r) ^ DarkRoom(?r) ^ Light(?l) ^ locatedIn(?l, ?r)
+//         -> DesiredOn(?l)
+// Note: the rule is generic - no lamp id is hard-coded. It fires once per light in the room.
+// ---------------------------------------------------------------------
+rule "R3 Occupied and dark => desire light on"
+    agenda-group "inference"
+    auto-focus true
+when
+    OccupiedRoom( $r : room )
+    DarkRoom( room == $r )
+    Light( locatedIn == $r, $l : id )
+then
+    insertLogical( new DesiredOn( $l ) );
+    System.out.println( "  [R3] DesiredOn(" + $l + ")" );
+end
+
+// ---------------------------------------------------------------------
+// R4  Quiet hours => suppress any DesiredOn in that room
+// SWRL: Room(?r) ^ hasState(?r, "quiet") ^ DesiredOn(?l) ^ locatedIn(?l, ?r)
+//         -> SuppressedAction(?l)
+// DesiredOn only stores the device id, so we join with the Device to get its room.
+// Device(...) matches any subclass (Light, Valve, ...) - like OWL SubClassOf.
+// ---------------------------------------------------------------------
+rule "R4 Quiet room => suppress action"
+    agenda-group "inference"
+    auto-focus true
+when
+    Room( hasState == "quiet", $r : id )
+    DesiredOn( $l : device )
+    Device( id == $l, locatedIn == $r )
+then
+    insertLogical( new SuppressedAction( $l ) );
+    System.out.println( "  [R4] SuppressedAction(" + $l + ")" );
+end
+
+// ---------------------------------------------------------------------
+// R5  No motion for > 30 minutes => room is empty
+// SWRL: Room(?r) ^ lastMotionMinutes(?r, ?m) ^ swrlb:greaterThan(?m, 30)
+//         -> EmptyRoom(?r)
+// ---------------------------------------------------------------------
+rule "R5 No recent motion => empty room"
+    agenda-group "inference"
+    auto-focus true
+when
+    Room( lastMotionMinutes > 30, $r : id )
+then
+    insertLogical( new EmptyRoom( $r ) );
+    System.out.println( "  [R5] EmptyRoom(" + $r + ")" );
+end
+
+// ---------------------------------------------------------------------
+// R6  Empty room and a light there is ON => desire it OFF
+// SWRL: EmptyRoom(?r) ^ Light(?l) ^ locatedIn(?l, ?r) ^ hasState(?l, "on")
+//         -> DesiredOff(?l)
+// ---------------------------------------------------------------------
+rule "R6 Empty room and light on => desire light off"
+    agenda-group "inference"
+    auto-focus true
+when
+    EmptyRoom( $r : room )
+    Light( locatedIn == $r, hasState == "on", $l : id )
+then
+    insertLogical( new DesiredOff( $l ) );
+    System.out.println( "  [R6] DesiredOff(" + $l + ")" );
+end

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+  <!--
+    Two knowledge bases over the same model, one per conflict-resolution strategy.
+    packages="..." selects which rule files a KieBase contains: every .drl file whose
+    folder (under src/main/resources) matches one of the listed packages.
+    Several packages are separated by commas, e.g. packages="a.b.c, a.b.d".
+  -->
+
+  <!-- inference before actuation via salience (rules/salience/*.drl) -->
+  <kbase name="salienceKB" packages="ro.upb.krr.smarthome.rules.salience">
+    <!-- stateful session (the default): changes to facts are tracked -->
+    <ksession name="salienceSession" type="stateful" default="true"/>
+  </kbase>
+
+  <!-- inference before actuation via agenda groups (rules/agenda/*.drl) -->
+  <kbase name="agendaKB" packages="ro.upb.krr.smarthome.rules.agenda">
+    <ksession name="agendaSession" type="stateful"/>
+  </kbase>
+</kmodule>

@@ -1,0 +1,70 @@
+// =====================================================================
+//  KRR Lab 4 - Smart home rules
+//  Part 3: acting on the intents (the role Home Assistant plays on slide 32)
+// =====================================================================
+//
+//  On slide 32, Home Assistant reads "lamp1 is DesiredOn" and turns it on.
+//  In Drools the RHS of a rule can perform the action itself, so these are
+//  event-condition-action rules. Here the "action" changes the Light fact and
+//  prints the Home Assistant service call that would be made.
+//
+//  agenda-group "actuation": these rules only fire while the "actuation" group
+//  has the focus. SmartHomeApp puts "inference" on top of the focus stack, so
+//  all inference (01, 02) finishes before anything is switched. Otherwise a
+//  light could be switched before an Inconsistency or a SuppressedAction has
+//  been derived. If an actuation changes a fact and new inference becomes
+//  possible, the inference rules take the focus back (auto-focus true).
+// =====================================================================
+
+package ro.upb.krr.smarthome.rules.agenda;
+
+import ro.upb.krr.smarthome.model.*;
+
+// ---------------------------------------------------------------------
+// A1  Turn a light ON when desired, unless suppressed or the room is inconsistent.
+//     "not" = negation as failure: true if NO such fact is in working memory.
+// ---------------------------------------------------------------------
+rule "A1 Actuate: turn light on"
+    agenda-group "actuation"
+when
+    DesiredOn( $l : device )
+    not SuppressedAction( device == $l )
+    $light : Light( id == $l, hasState == "off", $r : locatedIn )
+    not Inconsistency( room == $r )
+then
+    modify( $light ) { setHasState( "on" ) };
+    System.out.println( "  [A1] >> HA call: light.turn_on   entity_id: light." + $l );
+end
+
+// ---------------------------------------------------------------------
+// A2  Turn a light OFF when desired, unless the room is inconsistent.
+// ---------------------------------------------------------------------
+rule "A2 Actuate: turn light off"
+    agenda-group "actuation"
+when
+    DesiredOff( $l : device )
+    $light : Light( id == $l, hasState == "on", $r : locatedIn )
+    not Inconsistency( room == $r )
+then
+    modify( $light ) { setHasState( "off" ) };
+    System.out.println( "  [A2] >> HA call: light.turn_off  entity_id: light." + $l );
+end
+
+// ---------------------------------------------------------------------
+// A3  Report actions that were blocked (useful when debugging the rule base).
+// ---------------------------------------------------------------------
+rule "A3 Report suppressed action"
+    agenda-group "actuation"
+when
+    SuppressedAction( $l : device )
+then
+    System.out.println( "  [A3] -- " + $l + " is desired on, but suppressed (quiet mode)" );
+end
+
+rule "A4 Report blocked room"
+    agenda-group "actuation"
+when
+    Inconsistency( $r : room )
+then
+    System.out.println( "  [A4] -- no actuation in " + $r + " until the inconsistency is resolved" );
+end

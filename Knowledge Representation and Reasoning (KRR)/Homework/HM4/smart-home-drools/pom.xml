@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ro.upb.krr</groupId>
+  <artifactId>smart-home-drools</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+  <name>KRR Lab 4 - Smart home rules in Drools</name>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <drools.version>9.44.0.Final</drools.version>
+  </properties>
+
+  <dependencies>
+    <!-- Drools engine (Phreak) + DRL compiler -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-engine</artifactId>
+      <version>${drools.version}</version>
+    </dependency>
+    <!-- classic (MVEL-based) DRL compiler, needed to build rules at runtime from kmodule.xml -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-mvel</artifactId>
+      <version>${drools.version}</version>
+    </dependency>
+    <!-- needed to read META-INF/kmodule.xml -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-xml-support</artifactId>
+      <version>${drools.version}</version>
+    </dependency>
+    <!-- silence / route Drools logging; pin the 2.x API (drools-xml-support drags in 1.7.x) -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <mainClass>ro.upb.krr.smarthome.SmartHomeApp</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
