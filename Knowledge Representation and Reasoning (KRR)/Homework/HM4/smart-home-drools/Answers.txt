@@ -1,0 +1,100 @@
+1.a) Step 0 is the initialisation of the smart home.
+    After each step, session.fireAllRules() is called
+
+    === 0. Initial state: insert all entities
+  [R1] OccupiedRoom(livingRoom)
+  [R1] OccupiedRoom(bedroom)
+  [R2] DarkRoom(livingRoom)
+  [R2] DarkRoom(bedroom)
+  [R3] DesiredOn(lamp2)
+  [R3] DesiredOn(lamp1)
+  [R4] SuppressedAction(lamp2)
+  [R5] EmptyRoom(kitchen)
+  [R6] DesiredOff(lamp3)
+  [A1] >> HA call: light.turn_on   entity_id: light.lamp1
+  [A2] >> HA call: light.turn_off  entity_id: light.lamp3
+  [A3] -- lamp2 is desired on, but suppressed (quiet mode)
+  (12 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp1), DesiredOn(lamp2), EmptyRoom(kitchen), OccupiedRoom(bedroom), OccupiedRoom(livingRoom), SuppressedAction(lamp2)
+  Lights       : lamp1=on, lamp2=off, lamp3=off
+
+    === 1. Motion stops in the living room (motion1 -> off)
+  (0 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp2), EmptyRoom(kitchen), OccupiedRoom(bedroom), SuppressedAction(lamp2)
+  Lights       : lamp1=on, lamp2=off, lamp3=off
+
+=== 2. 40 minutes pass without motion in the living room
+  [R5] EmptyRoom(livingRoom)
+  [R6] DesiredOff(lamp1)
+  [A2] >> HA call: light.turn_off  entity_id: light.lamp1
+  (3 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp2), EmptyRoom(kitchen), EmptyRoom(livingRoom), OccupiedRoom(bedroom), SuppressedAction(lamp2)
+  Lights       : lamp1=off, lamp2=off, lamp3=off
+
+=== 3. Stale data: motion1 reports 'on' again, but lastMotionMinutes is still 40
+  [R1] OccupiedRoom(livingRoom)
+  [C1] WARNING: livingRoom is both occupied and empty (stale sensor?)
+  [R3] DesiredOn(lamp1)
+  [A4] -- no actuation in livingRoom until the inconsistency is resolved
+  (4 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp1), DesiredOn(lamp2), EmptyRoom(kitchen), EmptyRoom(livingRoom), Inconsistency(livingRoom), OccupiedRoom(bedroom), OccupiedRoom(livingRoom), SuppressedAction(lamp2)
+  Lights       : lamp1=off, lamp2=off, lamp3=off
+
+=== 4. Home Assistant refreshes the timestamp (lastMotionMinutes -> 0)
+  [A1] >> HA call: light.turn_on   entity_id: light.lamp1
+  (1 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp1), DesiredOn(lamp2), EmptyRoom(kitchen), OccupiedRoom(bedroom), OccupiedRoom(livingRoom), SuppressedAction(lamp2)
+  Lights       : lamp1=on, lamp2=off, lamp3=off
+
+=== 5. Night mode ends in the bedroom (bedroom state 'quiet' -> 'normal')
+  [A1] >> HA call: light.turn_on   entity_id: light.lamp2
+  (1 rule firings)
+  Derived facts: DarkRoom(bedroom), DarkRoom(livingRoom), DesiredOn(lamp1), DesiredOn(lamp2), EmptyRoom(kitchen), OccupiedRoom(bedroom), OccupiedRoom(livingRoom)
+  Lights       : lamp1=on, lamp2=on, lamp3=off
+
+b)Living room is no longer occupied because motion stopped. (rule 1)
+    Lamp1 si no longer desired on because living is no longer occupied (rule 3)
+    These facts were not removed, they are just no longer infered
+
+c)Because there is no rule that will turn if of at that point.
+    In step 2, rule 5 derives the living room is empty, rules 6 derives the lamp is desired off. 
+    An interesting observation is that the room can be empty, occupied or neither.
+    Than A2 activates to turn the light off.
+
+d) If we replace insertLogical with insert, which doesn t support truth maintenance, we
+    land in a situation where the living room is both empty and occupied.
+    This is because "occupied" is never redacted, even if it's cause was redacted.
+
+
+Exercise 2:
+a)
+    Because motion 1 detects motion, living becomes occupied (rule 1)
+    Rule C1 warns of a inconssistency.
+    Rule 1 sets lamp one as desired. 
+   !! A1 should have fired but (not Inconsistency)
+    A4 prints
+
+b)not SuppressedAction( device == $l )
+    It won t turn it on
+
+c) Salience represents the priority of the rules.
+In our case, -10 means they will me executed last, after inference. Without it, it might execute 
+before some of them.
+Therefore, lamp2 cout get turned on even if it is supressed. It did not happen on my machine,
+ but by setting sailence to 10 i was able to observe the effect. 
+ 
+
+
+ & "C:\Users\radun\Desktop\Artificial-Intelligence-Masters\Knowledge Representation and Reasoning (KRR)\Homework\HM4\smart-home-drools\apache-maven-3.10.0\bin\mvn.cmd" -q compile exec:java > salience.txt
+ & "C:\Users\radun\Desktop\Artificial-Intelligence-Masters\Knowledge Representation and Reasoning (KRR)\Homework\HM4\smart-home-drools\apache-maven-3.10.0\bin\mvn.cmd" -q compile exec:java "-Dexec.args=agenda" > agenda.txt
+ code --diff salience.txt agenda.txt
+
+ d) only one operation order changes, within the same group. Salience assigns numerical priorities to rules,
+  with higher values firing before lower values. 
+ Agenda groups provide a different mechanism for controlling execution
+  by organizing rules into groups
+e)By removing the specifiend grup it drops into MAIN group, which in our case executes 
+AFTER inference and action groups
+Lamp 2 no longer gets supressed
+
+f)DesiredOff remains in memory because the lamp doesn t get turned off

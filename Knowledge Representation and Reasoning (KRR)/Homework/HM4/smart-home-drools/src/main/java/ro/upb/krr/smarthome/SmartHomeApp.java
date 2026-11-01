@@ -41,6 +41,13 @@ public class SmartHomeApp {
     private final LuxSensor lux3 = new LuxSensor("lux3", "kitchen", 300);
     private final Light lamp3 = new Light("lamp3", "kitchen", "on");
 
+
+    //bathroom
+    private final Room bathroom = new Room("bathroom", "normal", 0);
+    private final WaterLeakSensor leak1 = new WaterLeakSensor("leak1", "bathroom", "dry");
+    private final Valve valve1 = new Valve("valve1", "bathroom", "open");
+
+
     public SmartHomeApp(String version) {
         if (!version.equals("salience") && !version.equals("agenda")) {
             throw new IllegalArgumentException("Unknown version '" + version + "': use 'salience' or 'agenda'");
@@ -67,7 +74,8 @@ public class SmartHomeApp {
         step("0. Initial state: insert all entities", () -> {
             for (Object o : List.of(livingRoom, motion1, lux1, lamp1,
                                     bedroom, motion2, lux2, lamp2,
-                                    kitchen, motion3, lux3, lamp3)) {
+                                    kitchen, motion3, lux3, lamp3,
+                                    bathroom, leak1, valve1)) {
                 session.insert(o);
             }
         });
@@ -95,6 +103,13 @@ public class SmartHomeApp {
         step("5. Night mode ends in the bedroom (bedroom state 'quiet' -> 'normal')", () -> {
             bedroom.setHasState("normal");
             update(bedroom);
+
+            
+        });
+
+        step("6. Water leak detected in the bathroom", () -> {
+            leak1.setHasState("wet");
+            update(leak1);
         });
     }
 
@@ -121,6 +136,14 @@ public class SmartHomeApp {
      * re-evaluates that rule (and retracts its logical conclusion) when
      * "inference" has the focus again - hence the loop.
      */
+
+
+    // private int fireWithAgendaGroups() {
+    //     session.getAgenda().getAgendaGroup("actuation").setFocus();
+    //     session.getAgenda().getAgendaGroup("inference").setFocus();
+
+    //     return session.fireAllRules();
+    // }
     private int fireWithAgendaGroups() {
         int fired = 0, n;
         do {

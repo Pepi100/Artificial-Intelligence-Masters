@@ -67,3 +67,19 @@ when
 then
     System.out.println( "  [A4] -- no actuation in " + $r + " until the inconsistency is resolved" );
 end
+
+
+
+rule "A5 Actuate: close valve"
+    salience -10
+when
+    DesiredClose( $v : device )
+    //does not check for SuppressedAction, because we want to close the valve even in quiet mode
+    //also, closing a valve shouldn t make that much noise
+    $valve : Valve( id == $v, hasState == "open" )
+then
+    modify( $valve ) { setHasState( "closed" ) };
+    System.out.println(
+        "  [A5] >> HA call: valve.close_valve   entity_id: valve." + $v
+    );
+end

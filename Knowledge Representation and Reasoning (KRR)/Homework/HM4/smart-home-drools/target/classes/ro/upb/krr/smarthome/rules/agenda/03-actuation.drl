@@ -68,3 +68,16 @@ when
 then
     System.out.println( "  [A4] -- no actuation in " + $r + " until the inconsistency is resolved" );
 end
+
+
+rule "A5 Actuate: close valve"
+    agenda-group "actuation"
+when
+    DesiredClose( $v : device )
+    $valve : Valve( id == $v, hasState == "open" )
+then
+    modify( $valve ) { setHasState( "closed" ) };
+    System.out.println(
+        "  [A5] >> HA call: valve.close_valve   entity_id: valve." + $v
+    );
+end
