@@ -1,21 +1,9 @@
-from typing import List, Dict, Tuple, Any, Set, Optional
-
-from networkx.algorithms import (
-    moral, is_chordal,
-    complete_to_chordal_graph,
-    chordal_graph_cliques
-)
-
-from collections import defaultdict
-from functools import reduce
-from copy import deepcopy
-from pprint import pprint
-
-import matplotlib.pyplot as plt
+from typing import List, Dict, Tuple, Any
 import pandas as pd
 import networkx as nx
 import itertools
 import random
+from copy import deepcopy
 import numpy as np
 
 
@@ -46,29 +34,6 @@ def factor_crossjoin(f1: pd.DataFrame, f2: pd.DataFrame, how: str = "outer", **k
     return res
 
 
-def divide_factors(f1: pd.DataFrame, f2: pd.DataFrame) -> pd.DataFrame:
-    f1_vars = f1.index.names
-    f2_vars = f2.index.names
-
-    common_vars = [v for v in f1_vars if v in f2_vars]
-
-    if not common_vars:
-        ### we have to do a cross join
-        f_res = factor_crossjoin(f1, f2)
-        f_res["prob"] = f_res["prob_x"] / f_res["prob_y"]
-        f_res = f_res.drop(columns=["prob_x", "prob_y"])
-
-    else:
-        ### there is a set of common vars, so we merge on them
-        disjoint_vars = [v for v in f1_vars if v not in f2_vars] + [v for v in f2_vars if v not in f1_vars]
-        f_res = pd.merge(f1.reset_index(), f2.reset_index(), on=common_vars, how="inner")\
-            .set_index(keys=disjoint_vars + common_vars)
-        f_res["prob"] = f_res["prob_x"] / f_res["prob_y"]
-        f_res = f_res.drop(columns=["prob_x", "prob_y"])
-
-    return f_res
-
-
 def multiply_factors(f1: pd.DataFrame, f2: pd.DataFrame) -> pd.DataFrame:
     f1_vars = f1.index.names
     f2_vars = f2.index.names
@@ -77,7 +42,7 @@ def multiply_factors(f1: pd.DataFrame, f2: pd.DataFrame) -> pd.DataFrame:
 
     if not common_vars:
         ### we have to do a cross join
-        f_res = factor_crossjoin(f1, f2)
+        f_res = BayesNode.factor_crossjoin(f1, f2)
         f_res["prob"] = f_res["prob_x"] * f_res["prob_y"]
         f_res = f_res.drop(columns=["prob_x", "prob_y"])
 
@@ -90,25 +55,6 @@ def multiply_factors(f1: pd.DataFrame, f2: pd.DataFrame) -> pd.DataFrame:
         f_res = f_res.drop(columns=["prob_x", "prob_y"])
 
     return f_res
-
-
-def absorption(
-    factor: pd.DataFrame,
-    projection: pd.DataFrame or float,
-    old_projection: pd.DataFrame or float
-) -> pd.DataFrame:
-
-    res = factor
-
-    if isinstance(projection, pd.DataFrame):
-        res = multiply_factors(factor, projection)
-    else:
-        res *= projection
-
-    if isinstance(old_projection, pd.DataFrame):
-        return divide_factors(res, old_projection)
-
-    return res / old_projection
 
 
 def sumout(f:pd.DataFrame, vars: List[str]) -> pd.DataFrame or float:
@@ -173,11 +119,12 @@ class BayesNode:
         self.parent_nodes = parent_nodes
         self.cpd = cpd
 
+
     def to_factor(self) -> Factor:
         factor_vars = [self.var_name] + [p.var_name for p in self.parent_nodes]
         return Factor(vars=factor_vars, table=self.cpd.copy(deep=True))
 
-    def pretty_print(self):
+    def pretty_print_str(self):
         res = ""
         res += "Node(%s" % self.var_name
         if self.parent_nodes:
@@ -354,10 +301,10 @@ class BayesNet:
             remaining_vars = new_vars
         return values
 
-    def pretty_print(self):
+    def pretty_print_str(self):
         res = "Bayesian Network:\n"
         for var_name in self.nodes:
-            res += self.nodes[var_name].pretty_print() + "\n"
+            res += self.nodes[var_name].pretty_print_str() + "\n"
 
         return res
 
@@ -379,52 +326,18 @@ class JunctionTree:
     def __init__(self, bn: BayesNet):
         self.bn = bn
         self.clique_tree = self._get_clique_tree()
-        self.messages = None
-        self.uncalibrated_jt = None
 
     def _moralize_graph(self, g: nx.DiGraph) -> nx.Graph:
-        return moral.moral_graph(g)
+        pass
 
     def _triangulate(self, h: nx.Graph) -> nx.Graph:
-        chordal_graph, _ = complete_to_chordal_graph(h)
-        return chordal_graph
+        pass
 
     def _create_clique_graph(self, th: nx.Graph) -> nx.Graph:
-        assert is_chordal(th), "Given Graph is not chordal"
-
-        # Get the maximum cliques of a chordal graph
-        cliques = [tuple(sorted(clique)) for clique in chordal_graph_cliques(th)]
-
-        clique_graph = nx.Graph()
-        clique_graph.add_nodes_from(cliques, type="clique")
-
-        for clique1, clique2 in itertools.combinations(cliques, 2):
-            set_clique1 = set(clique1)
-            set_clique2 = set(clique2)
-
-            if set_clique1.isdisjoint(set_clique2):
-                continue
-
-            edge = tuple(sorted(set_clique1.intersection(set_clique2)))
-            clique_graph.add_edge(clique1, clique2, weight=len(edge), sepset=edge)
-
-        return clique_graph
+        pass
 
     def _extract_clique_tree(self, c: nx.Graph) -> nx.Graph:
-        return nx.maximum_spanning_tree(c, algorithm="kruskal")
-
-        # This code can be used to display the clique tree
-        # with the associated sepsets added as nodes in the graph
-
-        # for edge in list(clique_tree.edges(data=True)):
-        #     clique1, clique2, node = edge[0], edge[1], edge[2]["sepset"]
-
-        #     clique_tree.add_node(node, type="sepset")
-        #     clique_tree.add_edge(clique1, node)
-        #     clique_tree.add_edge(clique2, node)
-        #     clique_tree.remove_edge(clique1, clique2)
-
-        # return clique_tree
+        pass
 
     def _get_clique_tree(self) -> nx.Graph:
         """
@@ -435,80 +348,22 @@ class JunctionTree:
         """
         g = self.bn.get_graph()
 
+        # TODO 1: moralize graph g
         #  see https://networkx.org/documentation/stable/_modules/networkx/algorithms/moral.html
         h = self._moralize_graph(g)
 
+        # TODO 2: triangulate h
         th = self._triangulate(h)
 
+        # TODO 3: create clique graph c - find maximal cliques
         #   see https://networkx.org/documentation/stable/reference/algorithms/chordal.html
         c = self._create_clique_graph(th)
 
+        # TODO 4: create clique tree from clique graph c - find Maximum Weight Spanning Tree in c
         #   see https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.tree.mst.maximum_spanning_tree.html#networkx.algorithms.tree.mst.maximum_spanning_tree
         t = self._extract_clique_tree(c)
 
         return t
-
-
-    def draw(self) -> None:
-        """
-        Draw the clique tree using nx.draw. Each node is labeled with the variables of its clique,
-        and each edge is labeled with the sepset of the two cliques it connects.
-        Nodes can be dragged with the mouse to pull overlapping cliques apart.
-        """
-        pos = nx.spring_layout(self.clique_tree, seed=42)
-        node_labels = {clique: ", ".join(clique) for clique in self.clique_tree.nodes()}
-        edge_labels = {
-            (c1, c2): ", ".join(sepset)
-            for c1, c2, sepset in self.clique_tree.edges(data="sepset")
-        }
-
-        fig, ax = plt.subplots(figsize=(10, 8))
-
-        def redraw():
-            xlim, ylim = ax.get_xlim(), ax.get_ylim()
-            ax.clear()
-            ax.set_title("Junction Tree")
-            nx.draw(self.clique_tree, pos, ax=ax, labels=node_labels, with_labels=True, font_weight='bold',
-                    node_color="lightblue", node_size=2500, font_size=9)
-            nx.draw_networkx_edge_labels(self.clique_tree, pos, ax=ax, edge_labels=edge_labels,
-                                         font_color="red", font_size=8)
-            if dragged["node"] is not None:
-                # keep the view fixed while dragging, otherwise autoscaling makes the plot jump
-                ax.set_xlim(xlim)
-                ax.set_ylim(ylim)
-            ax.axis("off")
-            fig.canvas.draw_idle()
-
-        dragged = {"node": None}
-
-        def on_press(event):
-            if event.inaxes != ax:
-                return
-            # pick the node closest to the click (in pixels), if the click falls inside its circle
-            to_pixels = ax.transData.transform
-            node, dist = min(
-                ((n, ((to_pixels(p) - (event.x, event.y)) ** 2).sum() ** 0.5) for n, p in pos.items()),
-                key=lambda nd: nd[1],
-            )
-            if dist < 25 * fig.dpi / 72:  # node_size=2500 pt^2 -> radius of 25 pt
-                dragged["node"] = node
-
-        def on_motion(event):
-            if dragged["node"] is None or event.inaxes != ax:
-                return
-            pos[dragged["node"]] = (event.xdata, event.ydata)
-            redraw()
-
-        def on_release(event):
-            dragged["node"] = None
-
-        fig.canvas.mpl_connect("button_press_event", on_press)
-        fig.canvas.mpl_connect("motion_notify_event", on_motion)
-        fig.canvas.mpl_connect("button_release_event", on_release)
-
-        redraw()
-        plt.show()
-
 
     def _load_factors(self) -> None:
         """
@@ -518,7 +373,6 @@ class JunctionTree:
         """
         raise NotImplementedError("Not implemented by student")
 
-    
     def _get_junction_tree(self, root_name: str = None) -> nx.DiGraph:
         """
         Set a direction to the edges of the clique tree (which is an nx.Graph) such that the Junction Tree has
@@ -536,7 +390,6 @@ class JunctionTree:
 
         return t
 
-
     def _incorporate_evidence(self, jt: nx.DiGraph, evidence: Dict[str, int]) -> nx.DiGraph:
         """
         Incorporate the evidence. For each variable in the `evidence' dictionary, choose **one** node of the
@@ -548,9 +401,8 @@ class JunctionTree:
         :return: The uncalibrated junction tree with incorporated evidence
         """
         raise NotImplementedError("Not implemented by student")
-    
 
-    def _run_belief_propagation(self, uncalibrated_jt: nx.DiGraph, root_name: str) -> nx.DiGraph:
+    def _run_belief_propagation(self, uncalibrated_jt) -> nx.DiGraph:
         """
         Run the upward and downward passes in the Belief propagation algorithm to calibrate
         :param uncalibrated_jt: The uncalibrated Junction Tree obtained after incorporating the evidence
@@ -558,33 +410,32 @@ class JunctionTree:
         """
         raise NotImplementedError("Not implemented by student")
 
-
     def _eval_query(self, calibrated_jt: nx.DiGraph, query: Dict[str, int]) -> float:
         """
         Evaluate the query by distinguishing between within- or out-of-clique queries.
         :param calibrated_jt: The calibrated Junction Tree
         :return: the float value for the probability of the query
         """
-        raise NotImplementedError("Not implemented by student")
 
     def run_query(self, query: Dict[str, int], evidence: Dict[str, int]) -> float:
         # TODO: select a non-None root
-        root_name = random.choice(list(self.clique_tree.nodes()))
-        self._load_factors()
+        root_name = None
 
         # get junction tree copy
         jt = self._get_junction_tree(root_name=root_name)
 
+        # load factors
+        self._load_factors()
+
         # incorporate evidence
-        uncalibrated_jt = self._incorporate_evidence(jt, evidence)
-        self.uncalibrated_jt = uncalibrated_jt
+        uncalibrared_jt = self._incorporate_evidence(jt, evidence)
 
         # calibrate tree
-        calibrated_jt = self._run_belief_propagation(uncalibrated_jt, root_name)
+        calibrated_jt = self._run_belief_propagation(uncalibrared_jt)
 
         return self._eval_query(calibrated_jt, query)
 
-    def run_queries(self, queries: List[Dict[str, int]]) -> None:
+    def run_queries(self, queries) -> None:
         """
         Run queries.
         :param queries: queries in the original bayesian network
@@ -594,30 +445,25 @@ class JunctionTree:
             if almost_equal(query_prob, query["answer"]):
                 print("Query %s OK. Answer is %.6f, given result is %.6f" % (str(query), query["answer"], query_prob))
             else:
-                print("Query %s NOT OK. Answer is %.6f, given result is %.6f" % (str(query), query["answer"], query_prob))
-
-    def _format_query(self, query: Dict[str, int]) -> str:
-        """
-        Format given query for better display
-        {'query': {'C': '1', 'D': '0', 'E': '0'}, 'cond': {'B': '0', 'I': '0'}}
-            query      | evidence
-        -> C=1 D=0 E=0 | B=0 I=0
-
-        :param query: The query to be formatted for display
-        :return: The formmated query
-        """
-        _query = " ".join(f"{var}={val}" for var, val in query["query"].items())
-        _cond  = " ".join(f"{var}={val}" for var, val in query["cond"].items())
-
-        return f"{_query} | {_cond} "
-
-    
-
+                print(
+                    "Query %s NOT OK. Answer is %.6f, given result is %.6f" % (str(query), query["answer"], query_prob))
 
 
 if __name__ == "__main__":
-    bn = BayesNet(bn_file="data/bnet")
-    jt = JunctionTree(bn=bn)
-    jt.draw()
+    bn = BayesNet(bn_file="data/bnet_exam   ")
+    # jt = JunctionTree(bn=bn)
+    # jt.run_queries(bn.queries)
 
-    jt.run_queries(bn.queries)
+    # get 20 samples from the Bayesian network and write the resulting dict to a file as space separated values
+    samples_dict = {
+        var: [] for var in sorted(bn.nodes.keys())
+    }
+    for _ in range(20):
+        sample = bn.sample()
+        for var in sorted(bn.nodes.keys()):
+            samples_dict[var].append(sample[var])
+
+    with open("data/samples_exam", "w") as f:
+        f.write(" ".join(sorted(bn.nodes.keys())) + "\n")
+        for i in range(20):
+            f.write(" ".join([str(samples_dict[var][i]) for var in sorted(bn.nodes.keys())]) + "\n")
