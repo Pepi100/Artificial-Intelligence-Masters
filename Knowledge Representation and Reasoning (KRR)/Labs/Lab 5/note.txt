@@ -1,0 +1,14 @@
+
+Midterm:  
+BNNs
+DAG Moralisation (Becomes undirected)
+Triangulation
+Identifying Cliques
+Each Clicque becomes a node in the Junction Graph, and node will be connected by what the have in common
+Junction Graph later becomes Junction tree (Maximal weighted tree, remove edges )
+
+In clique query (we read the table) vs out of clique query
+
+Running intersections. If two nodes contain A, then the entire path from one node the other must contain A
+
+For bonus, we find the minimal subtree that contains all needed nodes

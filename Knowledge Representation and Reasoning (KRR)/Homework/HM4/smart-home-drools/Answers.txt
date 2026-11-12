@@ -98,3 +98,5 @@ AFTER inference and action groups
 Lamp 2 no longer gets supressed
 
 f)DesiredOff remains in memory because the lamp doesn t get turned off
+
+Exercise 3:

@@ -102,6 +102,7 @@ end
 // SWRL: Room(?r) ^ lastMotionMinutes(?r, ?m) ^ swrlb:greaterThan(?m, 30)
 //         -> EmptyRoom(?r)
 // ---------------------------------------------------------------------
+
 rule "R5 No recent motion => empty room"
     agenda-group "inference"
     auto-focus true
@@ -131,14 +132,14 @@ end
 
 //My rule
 
-// rule "R7 No motion sensor is on => empty room"
-// when
-//     Room( $r : id )
-//     not MotionSensor( locatedIn == $r, hasState == "on" ) // this will also hold true is there is no motion sensor
-// then
-//     insertLogical( new EmptyRoom( $r ) );
-//     System.out.println( "  [R7] EmptyRoom(" + $r + ")" );
-// end
+rule "R7 No motion sensor is on => empty room"
+when
+    Room( $r : id )
+    not MotionSensor( locatedIn == $r, hasState == "on" ) // this will also hold true is there is no motion sensor
+then
+    insertLogical( new EmptyRoom( $r ) );
+    System.out.println( "  [R7] EmptyRoom(" + $r + ")" );
+end
 
 // My other rule
 

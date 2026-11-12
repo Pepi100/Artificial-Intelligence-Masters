@@ -112,3 +112,23 @@ then
     insertLogical( new DesiredOff( $l ) );
     System.out.println( "  [R6] DesiredOff(" + $l + ")" );
 end
+
+
+rule "R7 No motion sensor is on => empty room"
+when
+    Room( $r : id )
+    not MotionSensor( locatedIn == $r, hasState == "on" ) // this will also hold true is there is no motion sensor
+then
+    insertLogical( new EmptyRoom( $r ) );
+    System.out.println( "  [R7] EmptyRoom(" + $r + ")" );
+end
+
+
+rule "R8 Water leak => desire valve close"
+when
+    WaterLeakSensor( hasState == "wet", $r : locatedIn )
+    Valve( locatedIn == $r, hasState == "open", $v : id )
+then
+    insertLogical( new DesiredClose( $v ) );
+    System.out.println( "  [R8] DesiredClose(" + $v + ")" );
+end
